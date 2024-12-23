@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
+//using UnityEngine.SceneManagement;
 
 public class PlayerJump : MonoBehaviour
 {
-    public float jumpVel = 8.0f;
+    public float jumpVel = 7.0f;
     public float jumpHeight = 2.5f;
     public float gravity = 10.0f;
     float velY;
@@ -19,8 +20,7 @@ public class PlayerJump : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Debug.Log("Jump Fixed Update:");
-        //Debug.Log(isGrounded);
+
         if (GetComponent<CharacterController>().isGrounded)
         {
             isGrounded = true;
@@ -33,28 +33,24 @@ public class PlayerJump : MonoBehaviour
         {
             velY = jumpVel;
             Vector3 move = new Vector3(0f, velY * Time.fixedDeltaTime, 0f);
-            Debug.Log(velY);
+            //Debug.Log(velY);
             CollisionFlags flags = GetComponent<CharacterController>().Move(move);
             isGrounded = false;
-
-        }
-        else if (false)
-        {
-            // fer mig s a dalt
-            velY = velY + Time.fixedDeltaTime * gravity;
-            Debug.Log(velY);
-            Vector3 move = new Vector3(0f, velY, 0f);
-            CollisionFlags flags = GetComponent<CharacterController>().Move(move);
 
         }
         else if (!isGrounded)
         {
             velY = velY -  Time.fixedDeltaTime * gravity;
-            Debug.Log(velY);
+            //Debug.Log(velY);
             Vector3 move = new Vector3(0f, velY* Time.fixedDeltaTime, 0f);
             CollisionFlags flags = GetComponent<CharacterController>().Move(move);
 
         }
+
+        //if (Input.GetKey(KeyCode.R))
+        //{ //If you press R
+        //    SceneManager.LoadScene("Game"); //Load scene called Game
+        //}
 
     }
 }
