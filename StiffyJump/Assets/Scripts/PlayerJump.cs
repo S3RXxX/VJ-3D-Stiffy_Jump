@@ -10,12 +10,14 @@ public class PlayerJump : MonoBehaviour
     public float gravity = 10.0f;
     float velY;
     bool isGrounded;
+    AudioManager audioManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         velY = 0;
         isGrounded = GetComponent<CharacterController>().isGrounded;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void FixedUpdate()
@@ -31,6 +33,8 @@ public class PlayerJump : MonoBehaviour
         if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) 
             && isGrounded)
         {
+            audioManager.PlaySFX(audioManager.jumping);
+
             velY = jumpVel;
             Vector3 move = new Vector3(0f, velY * Time.fixedDeltaTime, 0f);
             //Debug.Log(velY);

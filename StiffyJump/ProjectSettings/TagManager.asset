@@ -8,6 +8,8 @@ TagManager:
   - turnR
   - turnL
   - Coin
+  - Audio
+  - LevelManager
   layers:
   - Default
   - TransparentFX

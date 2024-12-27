@@ -1,30 +1,35 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class ObstacleTriggers : MonoBehaviour
 {
-    public float timeToDestroy = 0.001f;
+    public float timeToDestroy = 0.01f;
     public GameObject explosion;
-    public float timeAnimation = 2.0f;
+    public float timeAnimation = 1f;
+    AudioManager audioManager;
+    public LevelManager levelManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        // levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Spikes") 
         {
-            Debug.Log("DEAD");
-
-            // fer explotar el player
-            Destroy(gameObject, timeToDestroy);
+            audioManager.PlaySFX(audioManager.breaking);
 
             // fer apareixer FVX
             Instantiate(explosion, transform.position, transform.rotation);
 
-            // wait n seconds
-            //yield return new WaitForSeconds(timeAnimation);
+            levelManager.RestartLevel(timeAnimation);
 
-            // reiniciar el nivell
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
+            // fer explotar el player
+            Destroy(gameObject, timeToDestroy);
         }
     }
+
+        
 }
