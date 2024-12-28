@@ -10,6 +10,10 @@ TagManager:
   - Coin
   - Audio
   - LevelManager
+  - obstacleTurnR
+  - obstacleTurnL
+  - obstacleGoBack
+  - trapActivator
   layers:
   - Default
   - TransparentFX

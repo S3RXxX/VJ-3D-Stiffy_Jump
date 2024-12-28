@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RotateCoins : MonoBehaviour
 {   
-    public float rotationSpeed = 1.0f;
+    public float rotationSpeed = 90.0f;
     private Vector3 rotation;
     void Start()
     {
