@@ -42,7 +42,7 @@ public class PlayerJump : MonoBehaviour
             isGrounded = false;
 
         }
-        else if (!isGrounded)
+        else if (!GetComponent<CharacterController>().isGrounded) //(!isGrounded)
         {
             velY = velY -  Time.fixedDeltaTime * gravity;
             //Debug.Log(velY);
@@ -56,5 +56,6 @@ public class PlayerJump : MonoBehaviour
         //    SceneManager.LoadScene("Game"); //Load scene called Game
         //}
 
+        Debug.Log("Grounded?: " + isGrounded);
     }
 }
