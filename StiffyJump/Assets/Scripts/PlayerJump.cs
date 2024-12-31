@@ -56,6 +56,5 @@ public class PlayerJump : MonoBehaviour
         //    SceneManager.LoadScene("Game"); //Load scene called Game
         //}
 
-        Debug.Log("Grounded?: " + isGrounded);
     }
 }
