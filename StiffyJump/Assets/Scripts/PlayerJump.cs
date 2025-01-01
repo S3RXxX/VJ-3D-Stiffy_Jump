@@ -30,7 +30,7 @@ public class PlayerJump : MonoBehaviour
         }
 
 
-        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W)) 
+        if ((Input.GetKey(KeyCode.Space)) 
             && isGrounded)
         {
             audioManager.PlaySFX(audioManager.jumping);

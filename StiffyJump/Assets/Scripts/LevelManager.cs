@@ -20,4 +20,9 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(delayTime);
         SceneManager.LoadScene(sceneToLoad); // Restart the current scene
     }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadSceneAsync("Level1");
+    }
 }
