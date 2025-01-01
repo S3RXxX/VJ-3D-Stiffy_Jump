@@ -16,6 +16,25 @@ public class PlayerForward : MonoBehaviour
 
     void Start()
     {
+        // mesh renderer 1 skin
+        int skinSelected = PlayerPrefs.GetInt("PlayerSkin");
+        //Debug.Log("skinN "+skinSelected);
+
+        if (skinSelected == 1)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else if (skinSelected == 2)
+        {
+            transform.GetChild(2).gameObject.SetActive(true);
+        }
+        else if (skinSelected == 3) 
+        {
+            transform.GetChild(3).gameObject.SetActive(true);
+        }
+
+
+
         pathFollower = GetComponent<PathFollower>();
         moveSpeed = speed;
         isStopped = false;

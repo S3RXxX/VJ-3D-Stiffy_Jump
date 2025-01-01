@@ -4,21 +4,31 @@ using TMPro;
 public class UI_Printer : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
-    private int score;
+    private int coin;
+    private int percentage;
     private CollectCoins coins;
 
     void Start()
     {
-        score = 0;
+        
         coins = GetComponent<CollectCoins>();
-        scoreText.text = "Score: " + score; 
+        coin = coins.coins;
+        percentage = coins.currentPercentage;
+        scoreText.text = "Score: " + coin;
+        scoreText.text += "\n";
+        scoreText.text += "Percentage: " + percentage;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        score = coins.coins;
-        scoreText.text = "Score: " + score;
-        //Debug.Log("Coins: " + pathFollower.coins);
+        coin = coins.coins;
+        percentage = coins.currentPercentage;
+        scoreText.text = "Score: " + coin;
+        scoreText.text += "\n";
+        scoreText.text += "Percentage: " + percentage;
+
+        coins.UpdateHighScore();
+        
     }
 }
