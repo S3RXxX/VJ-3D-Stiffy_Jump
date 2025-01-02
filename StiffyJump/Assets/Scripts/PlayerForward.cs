@@ -18,20 +18,23 @@ public class PlayerForward : MonoBehaviour
     {
         // mesh renderer 1 skin
         int skinSelected = PlayerPrefs.GetInt("PlayerSkin");
-        //Debug.Log("skinN "+skinSelected);
 
-        if (skinSelected == 1)
+        if (transform.gameObject.tag == "Player")
         {
-            transform.GetChild(0).gameObject.SetActive(true);
+            if (skinSelected == 1)
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+            }
+            else if (skinSelected == 2)
+            {
+                transform.GetChild(2).gameObject.SetActive(true);
+            }
+            else if (skinSelected == 3)
+            {
+                transform.GetChild(3).gameObject.SetActive(true);
+            }
         }
-        else if (skinSelected == 2)
-        {
-            transform.GetChild(2).gameObject.SetActive(true);
-        }
-        else if (skinSelected == 3) 
-        {
-            transform.GetChild(3).gameObject.SetActive(true);
-        }
+        
 
 
 
@@ -66,7 +69,7 @@ public class PlayerForward : MonoBehaviour
         Vector3 move = transform.forward * speed * Time.fixedDeltaTime;
 
         CollisionFlags flags = GetComponent<CharacterController>().Move(move);
-        if ((flags & CollisionFlags.Sides) != 0)
+        if (((flags & CollisionFlags.Sides) != 0) && transform.gameObject.tag == "Player")
         {
             audioManager.PlaySFX(audioManager.breaking);
 

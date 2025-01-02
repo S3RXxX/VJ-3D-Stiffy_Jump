@@ -8,11 +8,11 @@ public class ObstacleTriggers : MonoBehaviour
     public GameObject explosion;
     public float timeAnimation = 1f;
     AudioManager audioManager;
-    public LevelManager levelManager;
+    LevelManager levelManager;
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        // levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
+        levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
     }
 
     private void OnTriggerEnter(Collider other)
