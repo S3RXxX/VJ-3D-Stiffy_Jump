@@ -30,7 +30,7 @@ public class CollectCoins : MonoBehaviour
         currentPercentage = Mathf.FloorToInt(auxPercentage);
         PlayerPrefs.SetInt("currentPercentage", currentPercentage);
 
-        Debug.Log("%: " + auxPercentage);
+        //Debug.Log("%: " + auxPercentage);
     }
 
     public void UpdateHighScore()

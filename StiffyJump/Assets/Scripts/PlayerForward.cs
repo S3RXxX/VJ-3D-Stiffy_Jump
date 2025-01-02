@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class PlayerForward : MonoBehaviour
 {
     public float speed = 12.5f;
-    private float moveSpeed;
+    public float moveSpeed;
     private PathFollower pathFollower;
     private bool isStopped;
 
@@ -36,7 +36,14 @@ public class PlayerForward : MonoBehaviour
 
 
         pathFollower = GetComponent<PathFollower>();
-        moveSpeed = speed;
+        if (speed > 0) 
+        {
+            moveSpeed = speed;
+        }else
+        {
+            moveSpeed = 5;
+        }
+            
         isStopped = false;
     }
 

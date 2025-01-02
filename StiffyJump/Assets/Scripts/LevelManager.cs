@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     string sceneToLoad;
     public TextMeshProUGUI highScoreText;
     AudioManager audioManager;
+    MapRiseEffect mapRiser;
     void Start()
     {
         if (PlayerPrefs.GetInt("Level") == 1)
@@ -17,7 +18,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            sceneToLoad = "Level1";
+            sceneToLoad = "Level9";
         }
             
         if (SceneManager.GetActiveScene().name == "Main Menu")
@@ -29,6 +30,8 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        mapRiser = GameObject.FindGameObjectWithTag("DynamicMap")?.GetComponent<MapRiseEffect>();
+
     }
     private void FixedUpdate()
     {
@@ -104,13 +107,25 @@ public class LevelManager : MonoBehaviour
 
         }
 
+        if (Input.GetKey(KeyCode.Y))
+        {
+
+            PlayerPrefs.SetInt("Level", 1);
+            SceneManager.LoadSceneAsync("Level1");
+        }
+        else if (Input.GetKey(KeyCode.U))
+        {
+            PlayerPrefs.SetInt("Level", 2);
+            SceneManager.LoadSceneAsync("Level9");
+        }
+
     }
 
     public void RestartLevel(float delayTime)
     {
         PlayerPrefs.SetInt("Coins", 0);
         PlayerPrefs.SetInt("currentPercentage", 0);
-
+        mapRiser.Lower();
         StartCoroutine(RestartLevelAfterDelay(delayTime));
     }
 
@@ -149,7 +164,7 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetInt("currentPercentage", 0);
 
         // posar pantalla 1 nivell 2
-        SceneManager.LoadSceneAsync("SampleScene");
+        SceneManager.LoadSceneAsync("Level9");
     }
 
     public void toMenu()
@@ -198,7 +213,15 @@ public class LevelManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Level", 2);
         }
-        SceneManager.LoadSceneAsync(sceneIndex);
+        mapRiser.Lower();
+        //SceneManager.LoadSceneAsync(sceneIndex);
+        StartCoroutine(LoadLevelAfterDelay(0.5f, sceneIndex));
 
+    }
+
+    private IEnumerator LoadLevelAfterDelay(float delayTime, int iToLoad)
+    {
+        yield return new WaitForSeconds(delayTime);
+        SceneManager.LoadSceneAsync(iToLoad); // Restart the current scene
     }
 }

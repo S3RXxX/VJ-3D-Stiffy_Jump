@@ -16,6 +16,7 @@ TagManager:
   - trapActivator
   - Stop
   - ScoreUI
+  - DynamicMap
   layers:
   - Default
   - TransparentFX

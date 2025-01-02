@@ -1028,10 +1028,18 @@ PrefabInstance:
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 1347904716}
+    - target: {fileID: 7883759105552539865, guid: cd20ad01628ba1046af2c3cc7387320c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8317167586754884923, guid: cd20ad01628ba1046af2c3cc7387320c, type: 3}
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 1347904716}
+    - target: {fileID: 8325974726771091462, guid: cd20ad01628ba1046af2c3cc7387320c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

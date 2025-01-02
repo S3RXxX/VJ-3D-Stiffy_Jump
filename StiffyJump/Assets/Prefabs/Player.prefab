@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 12.5
-  levelManager: {fileID: 0}
+  moveSpeed: 0
   timeToDestroy: 0.01
   explosion: {fileID: 191186, guid: 079954accd64b32419ec069129c81273, type: 3}
   timeAnimation: 1
@@ -362,7 +362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b8cb3fac8e1e9b4096b0bd47bc05095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
 --- !u!114 &5424369965093965467
 MonoBehaviour:
   m_ObjectHideFlags: 0

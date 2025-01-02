@@ -1,39 +1,77 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class MapRiseEffect : MonoBehaviour
 {
-    public Transform map; // Assign your map object in the Inspector
-    public float startY = -10f; // Starting underground position
-    public float endY = 0f; // Final position at ground level
-    public float riseSpeed = 2f; // Speed of rising
+    public float undergroundY = -2.5f; // Starting underground position
+    public float groundY = 0f; // Final position at ground level
+    public float speed = 5f; // Speed of rising
+    public bool passed = false;
+    public bool dead = false;
 
-    private bool isRising = false;
+    PlayerForward playerForward;
 
     void Start()
     {
-        // Initialize map's position
-        map.position = new Vector3(map.position.x, startY, map.position.z);
-
-        // Start the rising animation
-        isRising = true;
-    }
-
-    void FIxedUpdate()
-    {
-        if (isRising)
+        if (PlayerPrefs.GetInt("Level") == 2)
         {
-            // Move the map upwards
-            map.position = Vector3.MoveTowards(
-                map.position,
-                new Vector3(map.position.x, endY, map.position.z),
-                riseSpeed * Time.deltaTime
-            );
-
-            // Stop rising when it reaches the target position
-            if (map.position.y >= endY)
-            {
-                isRising = false;
-            }
+            undergroundY = -95f;
         }
+        groundY = transform.position.y;
+        // Ensure the map starts in the correct position
+        transform.position = new Vector3(transform.position.x, undergroundY, transform.position.z);
+
+        // Make the map rise when the scene starts
+        Rise();
     }
+
+    private void Awake()
+    {
+        playerForward = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerForward>();
+    }
+
+
+    //void Update()
+    //{
+    //    // Check if the level is passed and the map needs to go underground
+    //    if (passed || dead)
+    //    {
+    //        Lower();
+    //    }
+    //}
+
+    public void Rise()
+    {
+        //playerForward.moveSpeed = playerForward.speed;
+        //Debug.Log("playerForward.moveSpeed " + playerForward.moveSpeed);
+        playerForward.speed = 0;
+        //StopAllCoroutines(); // Stop any ongoing animations
+        StartCoroutine(MoveMap(groundY));
+    }
+
+
+    public void Lower()
+    {
+        //StopAllCoroutines(); // Stop any ongoing animations
+        StartCoroutine(MoveMap(undergroundY));
+    }
+
+    private IEnumerator MoveMap(float targetY)
+    {
+        while (Mathf.Abs(transform.position.y - targetY) > 0.01f)
+        {
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                new Vector3(transform.position.x, targetY, transform.position.z),
+                speed * Time.deltaTime
+            );
+            yield return null;
+        }
+        passed = false;
+        playerForward.speed = playerForward.moveSpeed;
+    }
+
+
+
 }

@@ -30,7 +30,7 @@ public class ObjectMover : MonoBehaviour
 
             if (player != null)
             {
-                Debug.Log("Player detected!");
+                //Debug.Log("Player detected!");
                 // Calculate the distance to the Player
                 float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
