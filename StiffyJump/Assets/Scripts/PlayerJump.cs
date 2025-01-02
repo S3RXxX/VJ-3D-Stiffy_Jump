@@ -11,6 +11,7 @@ public class PlayerJump : MonoBehaviour
     float velY;
     bool isGrounded;
     AudioManager audioManager;
+    private bool GodMode = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,6 +29,12 @@ public class PlayerJump : MonoBehaviour
             isGrounded = true;
             velY = 0;
         }
+
+        // if (Input.GetKey(KeyCode.W))
+        // {
+        //     GodMode = !GodMode;
+        //     Debug.Log("Emtrp gpd ,pde");
+        // }
 
         if ((Input.GetKey(KeyCode.Space)) 
             && (isGrounded || GetComponent<CharacterController>().isGrounded))
@@ -59,7 +66,7 @@ public class PlayerJump : MonoBehaviour
     {
         //Debug.Log("Entered " + other.name);
         if (other.tag == "Jump"
-             && (isGrounded || GetComponent<CharacterController>().isGrounded))
+            && GodMode)
         {
             audioManager.PlaySFX(audioManager.jumping);
 
