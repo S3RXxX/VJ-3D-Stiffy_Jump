@@ -22,16 +22,15 @@ public class PlayerJump : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        if (GetComponent<CharacterController>().isGrounded)
+        bool terra = GetComponent<CharacterController>().isGrounded;
+        if (terra)
         {
             isGrounded = true;
             velY = 0;
         }
 
-
         if ((Input.GetKey(KeyCode.Space)) 
-            && isGrounded)
+            && (isGrounded || GetComponent<CharacterController>().isGrounded))
         {
             audioManager.PlaySFX(audioManager.jumping);
 
@@ -51,10 +50,7 @@ public class PlayerJump : MonoBehaviour
 
         }
 
-        //if (Input.GetKey(KeyCode.R))
-        //{ //If you press R
-        //    SceneManager.LoadScene("Game"); //Load scene called Game
-        //}
+        //Debug.Log(isGrounded + " " + terra + " " + velY);
 
     }
 }
