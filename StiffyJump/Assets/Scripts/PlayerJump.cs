@@ -50,7 +50,24 @@ public class PlayerJump : MonoBehaviour
 
         }
 
+
         //Debug.Log(isGrounded + " " + terra + " " + velY);
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("Entered " + other.name);
+        if (other.tag == "Jump"
+             && (isGrounded || GetComponent<CharacterController>().isGrounded))
+        {
+            audioManager.PlaySFX(audioManager.jumping);
+
+            velY = jumpVel;
+            Vector3 move = new Vector3(0f, velY * Time.fixedDeltaTime, 0f);
+            //Debug.Log(velY);
+            CollisionFlags flags = GetComponent<CharacterController>().Move(move);
+            isGrounded = false;
+        }
     }
 }
