@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
 {
     string sceneToLoad;
     public TextMeshProUGUI highScoreText;
+    AudioManager audioManager;
     void Start()
     {
         if (PlayerPrefs.GetInt("Level") == 1)
@@ -23,6 +24,11 @@ public class LevelManager : MonoBehaviour
         {
             ShowHighScore();
         }
+    }
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     private void FixedUpdate()
     {
@@ -146,16 +152,20 @@ public class LevelManager : MonoBehaviour
 
     public void selectP1()
     {
+        audioManager.PlaySFX(audioManager.meow);
         PlayerPrefs.SetInt("PlayerSkin",1);
+
     }
 
     public void selectP2()
     {
+        audioManager.PlaySFX(audioManager.ugh);
         PlayerPrefs.SetInt("PlayerSkin", 2);
     }
 
     public void selectP3()
     {
+        audioManager.PlaySFX(audioManager.chicken);
         PlayerPrefs.SetInt("PlayerSkin", 3);
     }
 

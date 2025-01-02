@@ -314,3 +314,6 @@ MonoBehaviour:
   breaking: {fileID: 8300000, guid: 323a7384b29ad5342a4c3a9760057e07, type: 3}
   coining: {fileID: 8300000, guid: 399fba362f2a0734885992497bef2466, type: 3}
   swimming: {fileID: 8300000, guid: 83d843e4116ea62429d45acc86d172fb, type: 3}
+  meow: {fileID: 8300000, guid: b7f122c0028d4bb4799c017462508975, type: 3}
+  chicken: {fileID: 8300000, guid: 7520fbf35c8cdb649887c689c0b3a948, type: 3}
+  ugh: {fileID: 8300000, guid: 135a28b00f8b17c4490fbe7494bc8304, type: 3}
