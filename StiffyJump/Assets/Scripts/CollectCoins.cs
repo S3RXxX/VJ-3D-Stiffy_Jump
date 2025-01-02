@@ -4,21 +4,33 @@ public class CollectCoins : MonoBehaviour
 {
     public int coins;
     public float timeToDestroy = 0.2f;
-    public int currentPercentage = 0;
+    public int currentPercentage;
+    float auxPercentage;
 
     AudioManager audioManager;
+    PlayerForward playerForward;
 
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-    }
+        playerForward = transform.GetComponent<PlayerForward>();
 
+    }
+    private void Start()
+    {
+        coins = PlayerPrefs.GetInt("Coins");
+        auxPercentage = PlayerPrefs.GetInt("currentPercentage");
+    }
     void FixedUpdate()
     {
-        // logica de que pugui el percentatge
-        int increment = 1;
+        // logica de que pugi el percentatge
+        int nBlocks = 6;
+        float increment = 100*(0.678f)/nBlocks;
+        auxPercentage += increment * playerForward.speed* Time.fixedDeltaTime;
+        currentPercentage = Mathf.FloorToInt(auxPercentage);
+        PlayerPrefs.SetInt("currentPercentage", currentPercentage);
 
-        currentPercentage += increment;
+        Debug.Log("%: " + auxPercentage);
     }
 
     public void UpdateHighScore()
@@ -42,6 +54,7 @@ public class CollectCoins : MonoBehaviour
         {
             audioManager.PlaySFX(audioManager.coining);
             coins += 1;
+            PlayerPrefs.SetInt("Coins", coins);
             Destroy(other.gameObject, timeToDestroy);
         }
     }

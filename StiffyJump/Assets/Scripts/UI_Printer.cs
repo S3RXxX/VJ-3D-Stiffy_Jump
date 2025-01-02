@@ -3,13 +3,15 @@ using TMPro;
 
 public class UI_Printer : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText;
+    private TextMeshProUGUI scoreText;
     private int coin;
     private int percentage;
     private CollectCoins coins;
 
+
     void Start()
     {
+        scoreText = GameObject.FindGameObjectWithTag("ScoreUI").GetComponent<TextMeshProUGUI>();
         
         coins = GetComponent<CollectCoins>();
         coin = coins.coins;

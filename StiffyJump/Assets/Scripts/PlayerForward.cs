@@ -9,7 +9,7 @@ public class PlayerForward : MonoBehaviour
     private bool isStopped;
 
     AudioManager audioManager;
-    public LevelManager levelManager;
+    LevelManager levelManager;
     public float timeToDestroy = 0.01f;
     public GameObject explosion;
     public float timeAnimation = 1f;

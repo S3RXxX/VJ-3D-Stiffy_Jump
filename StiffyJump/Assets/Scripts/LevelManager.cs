@@ -108,6 +108,9 @@ public class LevelManager : MonoBehaviour
 
     public void RestartLevel(float delayTime)
     {
+        PlayerPrefs.SetInt("Coins", 0);
+        PlayerPrefs.SetInt("currentPercentage", 0);
+
         StartCoroutine(RestartLevelAfterDelay(delayTime));
     }
 
@@ -125,8 +128,10 @@ public class LevelManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("PlayerSkin", 1);
         }
-        //Debug.Log("PlayGame");
-        
+
+        PlayerPrefs.SetInt("Coins", 0);
+        PlayerPrefs.SetInt("currentPercentage", 0);
+
         SceneManager.LoadSceneAsync("Level1");
         //SceneManager.LoadSceneAsync(0);
     }
@@ -139,7 +144,9 @@ public class LevelManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("PlayerSkin", 1);
         }
-        //Debug.Log("post if PlayGame2");
+
+        PlayerPrefs.SetInt("Coins", 0);
+        PlayerPrefs.SetInt("currentPercentage", 0);
 
         // posar pantalla 1 nivell 2
         SceneManager.LoadSceneAsync("SampleScene");
