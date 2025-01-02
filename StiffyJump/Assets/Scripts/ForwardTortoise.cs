@@ -13,11 +13,14 @@ public class ObjectMover : MonoBehaviour
     private float movedDistance = 0f; // Distance the object has moved
     private float currentSpeed; // Current speed of the object
 
+    AudioManager audioManager;
+
     void Start()
     {
         // Record the starting position of the object
         startPosition = transform.position;
         currentSpeed = initialSpeed; // Set initial speed
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -37,6 +40,7 @@ public class ObjectMover : MonoBehaviour
                 // Start moving if close enough to the Player
                 if (distanceToPlayer <= triggerDistance)
                 {
+                    audioManager.PlaySFX(audioManager.swimming);
                     isMoving = true;
                 }
             }

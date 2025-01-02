@@ -22,10 +22,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip meow;
     public AudioClip chicken;
     public AudioClip ugh;
+    
 
     void Start()
     {
-        // música inicial
+        // mï¿½sica inicial
         string escena = SceneManager.GetActiveScene().name;
         if (escena == "Main Menu")
         {
