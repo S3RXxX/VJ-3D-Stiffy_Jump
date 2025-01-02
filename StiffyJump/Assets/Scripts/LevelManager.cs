@@ -112,11 +112,13 @@ public class LevelManager : MonoBehaviour
 
             PlayerPrefs.SetInt("Level", 1);
             SceneManager.LoadSceneAsync("Level1");
+            PlayerPrefs.SetInt("currentPercentage", 0);
         }
         else if (Input.GetKey(KeyCode.U))
         {
             PlayerPrefs.SetInt("Level", 2);
             SceneManager.LoadSceneAsync("Level9");
+            PlayerPrefs.SetInt("currentPercentage", 0);
         }
 
     }
@@ -194,15 +196,26 @@ public class LevelManager : MonoBehaviour
     private void ShowHighScore()
     {
         highScoreText.text = "HIGHEST SCORE:\n";
-        if (PlayerPrefs.HasKey("SavedHighScore"))
+        highScoreText.text += "Level1: ";
+        if (PlayerPrefs.HasKey("SavedHighScore1"))
         {
-            highScoreText.text += PlayerPrefs.GetInt("SavedHighScore").ToString();
+            highScoreText.text += PlayerPrefs.GetInt("SavedHighScore1").ToString();
         }
         else
         {
             highScoreText.text += "0";
         }
-        
+
+        highScoreText.text += "\nLevel2: ";
+        if (PlayerPrefs.HasKey("SavedHighScore2"))
+        {
+            highScoreText.text += PlayerPrefs.GetInt("SavedHighScore2").ToString();
+        }
+        else
+        {
+            highScoreText.text += "0";
+        }
+
     }
 
     public void NextLevel()
@@ -211,7 +224,10 @@ public class LevelManager : MonoBehaviour
         sceneIndex++;
         if ("Level8" == SceneManager.GetActiveScene().name)
         {
-            PlayerPrefs.SetInt("Level", 2);
+
+            //PlayerPrefs.SetInt("Level", 2);
+            PlayerPrefs.SetInt("currentPercentage", 0);
+            sceneIndex = 0;
         }
         mapRiser.Lower();
         //SceneManager.LoadSceneAsync(sceneIndex);

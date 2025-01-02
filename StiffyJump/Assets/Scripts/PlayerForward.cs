@@ -13,6 +13,7 @@ public class PlayerForward : MonoBehaviour
     public float timeToDestroy = 0.01f;
     public GameObject explosion;
     public float timeAnimation = 1f;
+    PlayerJump playerJump;
 
     void Start()
     {
@@ -54,6 +55,7 @@ public class PlayerForward : MonoBehaviour
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
+        playerJump = GetComponent<PlayerJump>();
     }
 
 
@@ -69,7 +71,8 @@ public class PlayerForward : MonoBehaviour
         Vector3 move = transform.forward * speed * Time.fixedDeltaTime;
 
         CollisionFlags flags = GetComponent<CharacterController>().Move(move);
-        if (((flags & CollisionFlags.Sides) != 0) && transform.gameObject.tag == "Player")
+        if (((flags & CollisionFlags.Sides) != 0) && (transform.gameObject.tag == "Player")
+            && (!playerJump.GodMode))
         {
             audioManager.PlaySFX(audioManager.breaking);
 
@@ -86,7 +89,7 @@ public class PlayerForward : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Stop")
+        if (other.tag == "Stop" && !playerJump.GodMode)
         {
             speed = 0f;
             isStopped = true;

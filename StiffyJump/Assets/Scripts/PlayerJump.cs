@@ -11,18 +11,24 @@ public class PlayerJump : MonoBehaviour
     float velY;
     bool isGrounded;
     AudioManager audioManager;
-    private bool GodMode = true;
+    public bool GodMode = false;
+    private float timeToNextMove;
+    PlayerForward playerForward;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        timeToNextMove = 0f;
         velY = 0;
         isGrounded = GetComponent<CharacterController>().isGrounded;
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
+        GodMode = true;
     }
 
     void FixedUpdate()
     {
+        
         bool terra = GetComponent<CharacterController>().isGrounded;
         if (terra)
         {
@@ -30,11 +36,20 @@ public class PlayerJump : MonoBehaviour
             velY = 0;
         }
 
-        // if (Input.GetKey(KeyCode.W))
-        // {
-        //     GodMode = !GodMode;
-        //     Debug.Log("Emtrp gpd ,pde");
-        // }
+        if (Input.GetKey(KeyCode.G) && (timeToNextMove <= 0f))
+        {
+            playerForward = GetComponent<PlayerForward>();
+
+            GodMode = !GodMode;
+
+            if (GodMode)
+            {
+                playerForward.speed = playerForward.moveSpeed;
+            }
+
+            timeToNextMove = 0.25f;
+        }
+        timeToNextMove -= Time.fixedDeltaTime;
 
         if ((Input.GetKey(KeyCode.Space)) 
             && (isGrounded || GetComponent<CharacterController>().isGrounded))

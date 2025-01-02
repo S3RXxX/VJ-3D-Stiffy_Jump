@@ -20,13 +20,27 @@ public class CollectCoins : MonoBehaviour
     {
         coins = PlayerPrefs.GetInt("Coins");
         auxPercentage = PlayerPrefs.GetInt("currentPercentage");
+        Debug.Log("auxPercentage"+ auxPercentage);
     }
     void FixedUpdate()
     {
-        // logica de que pugi el percentatge
-        int nBlocks = 6;
-        float increment = 100*(0.678f)/nBlocks;
-        auxPercentage += increment * playerForward.speed* Time.fixedDeltaTime;
+        // logica de que pugi el percentatge (legacy code)
+        int nBlocks1 = 244;
+        int nBlocks2 = 276;
+        float k1=1.12f;
+        float k2 = 1.08f;
+        float increment1 = (100f/nBlocks1)/k1;
+        float increment2 = (100f/nBlocks2)/k2;
+
+        if (PlayerPrefs.GetInt("Level")==1)
+        {
+            auxPercentage += increment1 * playerForward.speed * Time.fixedDeltaTime;
+        }
+        else
+        {
+            auxPercentage += increment2 * playerForward.speed * Time.fixedDeltaTime;
+        }
+        
         currentPercentage = Mathf.FloorToInt(auxPercentage);
         PlayerPrefs.SetInt("currentPercentage", currentPercentage);
 
@@ -35,16 +49,39 @@ public class CollectCoins : MonoBehaviour
 
     public void UpdateHighScore()
     {
-        if (PlayerPrefs.HasKey("SavedHighScore"))
+        if (PlayerPrefs.GetInt("Level") == 1)
         {
-            if (currentPercentage > PlayerPrefs.GetInt("SavedHighScore")) {
-                PlayerPrefs.SetInt("SavedHighScore", currentPercentage);
+            if (PlayerPrefs.HasKey("SavedHighScore1"))
+            {
+                if (currentPercentage > PlayerPrefs.GetInt("SavedHighScore1"))
+                {
+                    PlayerPrefs.SetInt("SavedHighScore1", currentPercentage);
+                }
+            }
+            else
+            {
+                PlayerPrefs.SetInt("SavedHighScore1", currentPercentage);
             }
         }
-        else
+        else 
         {
-            PlayerPrefs.SetInt("SavedHighScore", currentPercentage);
+            if (PlayerPrefs.HasKey("SavedHighScore2"))
+            {
+                if (currentPercentage > PlayerPrefs.GetInt("SavedHighScore2"))
+                {
+                    PlayerPrefs.SetInt("SavedHighScore2", currentPercentage);
+                }
+            }
+            else
+            {
+                PlayerPrefs.SetInt("SavedHighScore2", currentPercentage);
+            }
+
         }
+        
+
+
+
         //Debug.Log("SavedHighScore" + PlayerPrefs.GetInt("SavedHighScore"));
     }
 
