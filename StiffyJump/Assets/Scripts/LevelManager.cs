@@ -120,6 +120,11 @@ public class LevelManager : MonoBehaviour
             SceneManager.LoadSceneAsync("Level9");
             PlayerPrefs.SetInt("currentPercentage", 0);
         }
+        else if (Input.GetKey(KeyCode.M))
+        {
+            SceneManager.LoadSceneAsync("Main Menu");
+            PlayerPrefs.SetInt("currentPercentage", 0);
+        }
 
     }
 
@@ -239,5 +244,14 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
         SceneManager.LoadSceneAsync(iToLoad); // Restart the current scene
+    }
+
+
+    public void ResetScores()
+    {
+        PlayerPrefs.SetInt("SavedHighScore1", 0);
+        PlayerPrefs.SetInt("SavedHighScore2", 0);
+        PlayerPrefs.Save();
+        ShowHighScore();
     }
 }

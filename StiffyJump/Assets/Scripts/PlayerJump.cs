@@ -23,7 +23,8 @@ public class PlayerJump : MonoBehaviour
         isGrounded = GetComponent<CharacterController>().isGrounded;
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 
-        GodMode = true;
+        //GodMode = true;
+        GodMode = PlayerPrefs.GetInt("GodMode")==1;
     }
 
     void FixedUpdate()
@@ -45,6 +46,11 @@ public class PlayerJump : MonoBehaviour
             if (GodMode)
             {
                 playerForward.speed = playerForward.moveSpeed;
+                PlayerPrefs.SetInt("GodMode", 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("GodMode", 0);
             }
 
             timeToNextMove = 0.25f;
