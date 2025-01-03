@@ -125,6 +125,10 @@ public class LevelManager : MonoBehaviour
             SceneManager.LoadSceneAsync("Main Menu");
             PlayerPrefs.SetInt("currentPercentage", 0);
         }
+        else if (Input.GetKey(KeyCode.Escape)) 
+        {
+            Application.Quit();
+        }
 
     }
 
